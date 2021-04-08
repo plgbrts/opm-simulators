@@ -122,9 +122,13 @@ namespace Opm
         // instead of G_t.
         static const bool gasoil = numPhases == 2 && (Indices::compositionSwitchIdx >= 0);
         static const int WQTotal = 0;
-        static const int WFrac = gasoil? -1000: 1;
-        static const int GFrac = gasoil? 1: 2;
+        //static const int WFrac = gasoil? -1000: 1;
+        //static const int GFrac = gasoil? 1: 2;
         static const int SFrac = !has_solvent ? -1000 : 3;
+
+        static const int WFrac = -1000; //for testing
+        static const int GFrac = 1; //for testing
+
         // the index for Bhp in primary variables and also the index of well control equation
         // they both will be the last one in their respective system.
         // TODO: we should have indices for the well equations and well primary variables separately
