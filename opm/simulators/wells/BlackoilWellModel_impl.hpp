@@ -1474,6 +1474,7 @@ namespace Opm {
         const int nw = numLocalWells();
         const int np = numPhases();
         well_potentials.resize(nw * np, 0.0);
+        return;
 
         auto well_state_copy = well_state_;
 

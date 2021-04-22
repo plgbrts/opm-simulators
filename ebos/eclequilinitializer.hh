@@ -82,7 +82,7 @@ public:
                                     FluidSystem,
                                     enableTemperature,
                                     enableEnergy,
-                                    Indices::gasEnabled,
+                                    false,
                                     enableBrine,
                                     Indices::numPhases
                                     > ScalarFluidState;
@@ -123,12 +123,12 @@ public:
 
             if (FluidSystem::enableDissolvedGas())
                 fluidState.setRs(initialState.rs()[elemIdx]);
-            else if (Indices::gasEnabled)
+            else if (false)
                 fluidState.setRs(0.0);
 
             if (FluidSystem::enableVaporizedOil())
                 fluidState.setRv(initialState.rv()[elemIdx]);
-            else if (Indices::gasEnabled)
+            else if (false)
                 fluidState.setRv(0.0);
 
 

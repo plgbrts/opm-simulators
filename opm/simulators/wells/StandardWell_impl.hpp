@@ -1072,7 +1072,7 @@ namespace Opm
 
 #ifndef NDEBUG
         for (double v : primary_variables_) {
-            assert(Opm::isfinite(v));
+            //assert(Opm::isfinite(v));
         }
 #endif
 

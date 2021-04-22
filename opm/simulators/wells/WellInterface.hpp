@@ -113,7 +113,7 @@ namespace Opm
         // For the conversion between the surface volume rate and reservoir voidage rate
         using RateConverterType = RateConverter::
         SurfaceToReservoirVoidage<FluidSystem, std::vector<int> >;
-        static const bool compositionSwitchEnabled = Indices::gasEnabled;
+        static const bool compositionSwitchEnabled = Indices::compositionSwitchIdx >= 0;
         using FluidState = Opm::BlackOilFluidState<Eval,
                                                    FluidSystem,
                                                    has_temperature,

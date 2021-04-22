@@ -187,7 +187,7 @@ namespace Opm
     double PIDAndIterationCountTimeStepControl::
     computeTimeStepSize( const double dt, const int iterations, const RelativeChangeInterface& relChange,  const double simulationTimeElapsed ) const
     {
-        double dtEstimatePID = PIDTimeStepControl :: computeTimeStepSize( dt, iterations, relChange, simulationTimeElapsed);
+        double dtEstimatePID = 1e99; //PIDTimeStepControl :: computeTimeStepSize( dt, iterations, relChange, simulationTimeElapsed);
 
         // adjust timesteps based on target iteration
         double dtEstimateIter;

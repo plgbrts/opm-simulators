@@ -1940,7 +1940,7 @@ public:
             rate[eqIdx] /= this->model().dofTotalVolume(globalDofIdx);
 
             Opm::Valgrind::CheckDefined(rate[eqIdx]);
-            assert(Opm::isfinite(rate[eqIdx]));
+            //  assert(Opm::isfinite(rate[eqIdx]));
         }
 
         if (enableAquifers_)
