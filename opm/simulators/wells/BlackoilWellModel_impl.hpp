@@ -46,8 +46,11 @@
 #include <opm/simulators/wells/TargetCalculator.hpp>
 
 #include <opm/simulators/utils/DeferredLoggingErrorHelpers.hpp>
+#include <opm/simulators/wells/WellGroupHelpers.hpp>
+#include <opm/simulators/wells/TargetCalculator.hpp>
 #include <opm/simulators/utils/MPIPacker.hpp>
 #include <opm/simulators/utils/phaseUsageFromDeck.hpp>
+
 
 #if COMPILE_BDA_BRIDGE
 #include <opm/simulators/linalg/bda/WellContributions.hpp>
@@ -1211,6 +1214,9 @@ namespace Opm {
     BlackoilWellModel<TypeTag>::
     updateWellControlsAndNetwork(const bool mandatory_network_balance, const double dt, DeferredLogger& local_deferredLogger)
     {
+        // PJPE: calculate common THP for subsea manifold well group (item 3 of NODEPROP set to YES)
+        computeWellGroupThp(local_deferredLogger);
+
         // not necessarily that we always need to update once of the network solutions
         bool do_network_update = true;
         bool well_group_control_changed = false;
@@ -2652,9 +2658,6 @@ namespace Opm {
                     deferred_logger.warning("WELL_INITIAL_SOLVE_FAILED", msg);
                 }
             }
-            // If we're using local well solves that include control switches, they also update
-            // operability, so reset before main iterations begin
-            well->resetWellOperability();
         }
         updatePrimaryVariables(deferred_logger);
 
