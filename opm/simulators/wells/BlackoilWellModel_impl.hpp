@@ -1215,8 +1215,7 @@ namespace Opm {
     updateWellControlsAndNetwork(const bool mandatory_network_balance, const double dt, DeferredLogger& local_deferredLogger)
     {
         // PJPE: calculate common THP for subsea manifold well group (item 3 of NODEPROP set to YES)
-        computeWellGroupThp(local_deferredLogger);
-
+        computeWellGroupThp(dt,local_deferredLogger);
         // not necessarily that we always need to update once of the network solutions
         bool do_network_update = true;
         bool well_group_control_changed = false;
@@ -1229,6 +1228,7 @@ namespace Opm {
             if (this->terminal_output_ && (network_update_iteration == iteration_to_relax) ) {
                 local_deferredLogger.info(" we begin using relaxed tolerance for network update now after " + std::to_string(iteration_to_relax) + " iterations ");
             }
+           
             const bool relax_network_balance = network_update_iteration >= iteration_to_relax;
             std::tie(do_network_update, well_group_control_changed) =
                     updateWellControlsAndNetworkIteration(mandatory_network_balance, relax_network_balance, dt,local_deferredLogger);
@@ -1326,6 +1326,7 @@ namespace Opm {
                 const auto ctrl = group.productionControls(summary_state);
                 const auto cmode = ctrl.cmode;
                 const auto pu = this->phase_usage_;
+
                 //TODO: Auto choke combined with RESV control is not supported
                 std::vector<Scalar> resv_coeff(pu.num_phases, 1.0);
                 Scalar gratTargetFromSales = 0.0;
