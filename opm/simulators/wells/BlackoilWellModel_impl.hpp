@@ -1398,6 +1398,7 @@ namespace Opm {
         bool well_group_thp_updated = false;
         for (const std::string& nodeName : network.node_names()) {
             const bool has_choke = network.node(nodeName).as_choke();
+            std::cout << "Group: " << nodeName << " has_choke: " << has_choke << std::endl;
             if (has_choke) {
                 const auto& summary_state = this->simulator_.vanguard().summaryState();
                 const Group& group = this->schedule().getGroup(nodeName, reportStepIdx);
